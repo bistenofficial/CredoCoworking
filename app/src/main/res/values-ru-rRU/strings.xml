@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Открытая комнта</string>
+    <string name="coworking_center">Коворкинг центр</string>
+    <string name="Create_account">Новенький? Создать аккаунт</string>
+    <string name="Login">Войти в мой аккаунт</string>
+</resources>
