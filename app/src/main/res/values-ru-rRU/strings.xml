@@ -4,4 +4,5 @@
     <string name="coworking_center">Коворкинг центр</string>
     <string name="Create_account">Новенький? Создать аккаунт</string>
     <string name="Login">Войти в мой аккаунт</string>
+    <string name="forgotPassword">Забыли пароль?</string>
 </resources>

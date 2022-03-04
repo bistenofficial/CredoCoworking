@@ -6,13 +6,17 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-public class MainActivity extends AppCompatActivity {
+public class LogRegActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_log_reg);
+        AuthFragment authFragment = new AuthFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.fr_place, authFragment)
+                .commit();
         setStatusBarTranslucent(true);
     }
     protected void setStatusBarTranslucent(boolean makeTranslucent) {

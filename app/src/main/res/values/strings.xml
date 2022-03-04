@@ -3,5 +3,6 @@
     <string name="coworking_center">Coworking center</string>
     <string name="Create_account">New here? Create an account</string>
     <string name="Login">Login to my account</string>
+    <string name="forgotPassword">Forgot your password?</string>
 
 </resources>
