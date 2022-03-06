@@ -6,36 +6,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <TextView
-        android:id="@+id/textViewCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/montserrat"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:text="@string/Create_account"
-        android:textColor="#80FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewCannotAcces"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:text="@string/forgotPassword"
-        android:textColor="#BFFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
-
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/buttonRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,16 +15,17 @@
         android:fontFamily="@font/montserrat"
         android:shadowColor="#000000"
         android:shadowRadius="4"
-        android:text="@string/Login"
+        android:text="Registration"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:theme="@style/Theme.OpenRoom.button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordRepeat" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
+        android:id="@+id/textInputLayoutPasswordRepeat"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -61,16 +34,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLogin">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/inputbg"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/montserrat"
-            android:hint="Password"
+            android:hint="Repeat Password"
             android:inputType="textPassword"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -96,6 +68,29 @@
             android:fontFamily="@font/montserrat"
             android:hint="Login"
             android:inputType="text"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="#A6FFFFFF"
+        android:theme="@style/TextInputLayoutStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLogin">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/inputbg"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/montserrat"
+            android:hint="Password"
+            android:inputType="textPassword"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
