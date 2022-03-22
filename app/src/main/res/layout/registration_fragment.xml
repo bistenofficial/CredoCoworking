@@ -37,6 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextPasswordRepeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/inputbg"
@@ -61,12 +62,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/inputbg"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/montserrat"
-            android:hint="Login"
+            android:hint="Phone number"
             android:inputType="text"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -84,6 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLogin">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/inputbg"

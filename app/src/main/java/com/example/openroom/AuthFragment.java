@@ -27,6 +27,7 @@ public class AuthFragment extends Fragment
     private EditText editTextPassword;
     private EditText editTextLogin;
     Toast toast;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         inflatedView = inflater.inflate(R.layout.authorization_fragment, container, false);
@@ -51,28 +52,22 @@ public class AuthFragment extends Fragment
             {
                 String password = editTextPassword.getText().toString();
                 String login = editTextLogin.getText().toString();
-
                 if ((password.length()!=0) && (login.length()!=0))
                 {
-                    //Start ProgressBar first (Set visibility VISIBLE)
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            //Starting Write and Read data with URL
-                            //Creating array for parameters
                             String[] field = new String[2];
                             field[0] = "Phone";
                             field[1] = "Password";
-                            //Creating array for data
                             String[] data = new String[2];
                             data[0] = login;
                             data[1] = password;
-                            PutData putData = new PutData("http://192.168.0.108/LoginRegister/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.88.43/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     String result = putData.getResult();
-                                    //End ProgressBar (Set visibility to GONE)
                                     Log.i("PutData", result);
                                     if (result.equals("Login Success"))
                                     {
@@ -89,7 +84,6 @@ public class AuthFragment extends Fragment
                                     }
                                 }
                             }
-                            //End Write and Read data with URL
                         }
                     });
                 }
@@ -100,7 +94,6 @@ public class AuthFragment extends Fragment
                 }
             }
         });
-
         return inflatedView;
     }
 
