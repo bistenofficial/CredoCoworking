@@ -1,6 +1,5 @@
 package com.example.openroom;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,10 +13,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+import com.google.common.hash.Hashing;
+import java.nio.charset.StandardCharsets;
+import java.sql.Timestamp;
+
 
 public class RegistrationFragment extends Fragment
 {
@@ -37,9 +39,14 @@ public class RegistrationFragment extends Fragment
             @Override
             public void onClick(View view)
             {
+                String phone = editTextLogin.getText().toString();
                 String password = editTextPassword.getText().toString();
                 String passwordRepeat = editTextPasswordRepeat.getText().toString();
-                String phone = editTextLogin.getText().toString();
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                long time = timestamp.getTime();
+                String timestring = String.valueOf(time);
+
+                final String hashed = Hashing.sha256().hashString(timestring+"open"+phone+"room", StandardCharsets.UTF_8).toString();
 
                 if((password.length()!=0)&&(passwordRepeat.length()!=0)&&(phone.length()!=0))
                 {
