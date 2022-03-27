@@ -72,6 +72,7 @@
             android:fontFamily="@font/montserrat"
             android:hint="Password"
             android:inputType="textPassword"
+            android:text="6931"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,8 +96,9 @@
             android:background="@drawable/inputbg"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/montserrat"
-            android:hint="Login"
+            android:hint="Phone"
             android:inputType="text"
+            android:text="79675364663"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 

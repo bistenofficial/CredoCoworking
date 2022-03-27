@@ -62,14 +62,14 @@ public class RegistrationFragment extends Fragment
                                 String[] data = new String[2];
                                 data[0] = phone;
                                 data[1] = password;
-                                PutData putData = new PutData("http://192.168.88.43/LoginRegister/signup.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
+                                PutData putData = new PutData("http://192.168.0.109/LoginRegister/signup.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
                                 if (putData.startPut()) {
                                     if (putData.onComplete()) {
                                         String result = putData.getResult();
                                         Log.i("PutData", result);
                                         if (result.equals("Sign Up Success"))
                                         {
-                                            toast = Toast.makeText(getContext(),"Успешная регистрация",Toast.LENGTH_LONG);
+                                            toast = Toast.makeText(getContext(),getString(R.string.Successful_registration),Toast.LENGTH_LONG);
                                             toast.show();
                                             AuthFragment authFragment = new AuthFragment();
                                             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -79,7 +79,7 @@ public class RegistrationFragment extends Fragment
                                         }
                                         else
                                         {
-                                            toast = Toast.makeText(getContext(),"Ошибка регистрации",Toast.LENGTH_LONG);
+                                            toast = Toast.makeText(getContext(),getString(R.string.Registration_error),Toast.LENGTH_LONG);
                                             toast.show();
                                         }
                                     }
@@ -89,13 +89,13 @@ public class RegistrationFragment extends Fragment
                     }
                     else
                     {
-                        toast = Toast.makeText(getContext(),"Пароли не совпадают",Toast.LENGTH_LONG);
+                        toast = Toast.makeText(getContext(),getString(R.string.Passwords_not_match),Toast.LENGTH_LONG);
                         toast.show();
                     }
                 }
                 else
                 {
-                    toast =  Toast.makeText(getContext(),"Не все поля заполнены",Toast.LENGTH_LONG);
+                    toast =  Toast.makeText(getContext(),getString(R.string.Not_fields_filled),Toast.LENGTH_LONG);
                     toast.show();
                 }
             }

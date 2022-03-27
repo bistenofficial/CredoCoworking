@@ -5,4 +5,8 @@
     <string name="Create_account">Новенький? Создать аккаунт</string>
     <string name="Login">Войти в мой аккаунт</string>
     <string name="forgotPassword">Забыли пароль?</string>
+    <string name="Successful_registration">Успешная регистрация</string>
+    <string name="Registration_error">Ошибка регистрации</string>
+    <string name="Not_fields_filled">Не все поля заполнены</string>
+    <string name="Passwords_not_match">Пароли не совпадают</string>
 </resources>

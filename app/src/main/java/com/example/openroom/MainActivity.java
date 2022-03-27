@@ -1,51 +1,69 @@
 package com.example.openroom;
 
-import android.Manifest;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.budiyev.android.codescanner.CodeScanner;
-import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
-import com.google.zxing.Result;
+import com.example.openroom.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private CodeScanner codeScanner;
-    boolean CameraPermission = false;
-    final int CAMERA_PERM = 1;
-    private TextView textViewDecode;
+    Toast toast;
+    ActivityMainBinding binding;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setStatusBarTranslucent(true);
-        ScannerFragment scannerFragment = new ScannerFragment();
+        binding.btnNav.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.goToProfile: {
+                    ReplaceFragment(new ProfileFragment());
+                    break;
+                }
+                case R.id.goToScanner: {
+                    ReplaceFragment(new ScannerFragment());
+                    break;
+                }
+            }
+            return true;
+        });
+        ProfileFragment profileFragment = new ProfileFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.mainCont, scannerFragment)
+                .add(R.id.mainCont, profileFragment)
                 .commit();
     }
-    protected void setStatusBarTranslucent(boolean makeTranslucent)
-    {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    protected void setStatusBarTranslucent(boolean makeTranslucent) {
         if (makeTranslucent) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
+private void ReplaceFragment(Fragment fragment)
+{
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction.replace(R.id.mainCont,fragment).commit();
+}
 }

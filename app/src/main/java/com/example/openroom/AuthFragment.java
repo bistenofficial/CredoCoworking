@@ -1,6 +1,8 @@
 package com.example.openroom;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,10 +28,12 @@ public class AuthFragment extends Fragment
     private TextView textViewCreate;
     private EditText editTextPassword;
     private EditText editTextLogin;
+    SharedPreferences sharedPreferencesPhone;
     Toast toast;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        sharedPreferencesPhone = this.getActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE);
         inflatedView = inflater.inflate(R.layout.authorization_fragment, container, false);
         textViewCreate = inflatedView.findViewById(R.id.textViewCreate);
         editTextPassword = inflatedView.findViewById(R.id.EditTextPassword);
@@ -39,6 +43,7 @@ public class AuthFragment extends Fragment
             @Override
             public void onClick(View view)
             {
+
                 RegistrationFragment registrationFragment = new RegistrationFragment();
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(R.id.fr_place,registrationFragment);
@@ -54,6 +59,7 @@ public class AuthFragment extends Fragment
                 String login = editTextLogin.getText().toString();
                 if ((password.length()!=0) && (login.length()!=0))
                 {
+
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -64,7 +70,7 @@ public class AuthFragment extends Fragment
                             String[] data = new String[2];
                             data[0] = login;
                             data[1] = password;
-                            PutData putData = new PutData("http://192.168.88.43/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
+                            PutData putData = new PutData("http://192.168.0.109/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     String result = putData.getResult();
@@ -73,6 +79,9 @@ public class AuthFragment extends Fragment
                                     {
                                         toast = Toast.makeText(getContext(),"Успешный вход",Toast.LENGTH_LONG);
                                         toast.show();
+                                        SharedPreferences.Editor editor = sharedPreferencesPhone.edit();
+                                        editor.putString("Phone", login);
+                                        editor.apply();
                                         Intent intentSign = new Intent(getActivity(), MainActivity.class);
                                         startActivity(intentSign);
                                         getActivity().finish();

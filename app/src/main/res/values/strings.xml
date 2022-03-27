@@ -4,5 +4,9 @@
     <string name="Create_account">New here? Create an account</string>
     <string name="Login">Login to my account</string>
     <string name="forgotPassword">Forgot your password?</string>
+    <string name="Successful_registration">Successful registration</string>
+    <string name="Registration_error">Registration error</string>
+    <string name="Not_fields_filled">Not all fields are filled</string>
+    <string name="Passwords_not_match">Passwords do not match</string>
 
 </resources>
