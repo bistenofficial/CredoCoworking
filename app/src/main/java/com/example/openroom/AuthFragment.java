@@ -21,89 +21,91 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class AuthFragment extends Fragment
-{
+public class AuthFragment extends Fragment {
     View inflatedView;
     private Button buttonLogin;
     private TextView textViewCreate;
     private EditText editTextPassword;
+    private String phone, password, timeString;
     private EditText editTextLogin;
     SharedPreferences sharedPreferencesPhone;
     Toast toast;
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         sharedPreferencesPhone = this.getActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE);
         inflatedView = inflater.inflate(R.layout.authorization_fragment, container, false);
         textViewCreate = inflatedView.findViewById(R.id.textViewCreate);
         editTextPassword = inflatedView.findViewById(R.id.EditTextPassword);
         editTextLogin = inflatedView.findViewById(R.id.EditTextLogin);
         buttonLogin = inflatedView.findViewById(R.id.buttonLogin);
-        textViewCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
+        textViewCreate.setOnClickListener(view -> {
 
-                RegistrationFragment registrationFragment = new RegistrationFragment();
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                transaction.replace(R.id.fr_place,registrationFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
+            RegistrationFragment registrationFragment = new RegistrationFragment();
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fr_place, registrationFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
+        buttonLogin.setOnClickListener(view -> {
+            phone = editTextLogin.getText().toString();
+            password = editTextPassword.getText().toString();
+            if (checkData())
             {
-                String password = editTextPassword.getText().toString();
-                String login = editTextLogin.getText().toString();
-                if ((password.length()!=0) && (login.length()!=0))
-                {
-
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            String[] field = new String[2];
-                            field[0] = "Phone";
-                            field[1] = "Password";
-                            String[] data = new String[2];
-                            data[0] = login;
-                            data[1] = password;
-                            PutData putData = new PutData("http://192.168.0.109/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
-                            if (putData.startPut()) {
-                                if (putData.onComplete()) {
-                                    String result = putData.getResult();
-                                    Log.i("PutData", result);
-                                    if (result.equals("Login Success"))
-                                    {
-                                        toast = Toast.makeText(getContext(),"Успешный вход",Toast.LENGTH_LONG);
-                                        toast.show();
-                                        SharedPreferences.Editor editor = sharedPreferencesPhone.edit();
-                                        editor.putString("Phone", login);
-                                        editor.apply();
-                                        Intent intentSign = new Intent(getActivity(), MainActivity.class);
-                                        startActivity(intentSign);
-                                        getActivity().finish();
-                                    }
-                                    else
-                                    {
-                                        toast = Toast.makeText(getContext(),"Ошибка входа",Toast.LENGTH_LONG);
-                                        toast.show();
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-                else
-                {
-                    toast = Toast.makeText(getContext(),"Ошибка ввода",Toast.LENGTH_LONG);
-                    toast.show();
-                }
+                signIn();
             }
         });
         return inflatedView;
+    }
+
+    private void signIn() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[2];
+                field[0] = "Phone";
+                field[1] = "Password";
+                String[] data = new String[2];
+                data[0] = phone;
+                data[1] = password;
+                PutData putData = new PutData("http://192.168.88.43/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.i("PutData", result);
+                        if (result.equals("Login Success")) {
+                            toast = Toast.makeText(getContext(), "Успешный вход", Toast.LENGTH_LONG);
+                            toast.show();
+                            SharedPreferences.Editor editor = sharedPreferencesPhone.edit();
+                            editor.putString("Phone", phone);
+                            editor.apply();
+                            Intent intentSign = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intentSign);
+                            getActivity().finish();
+                        } else {
+                            toast = Toast.makeText(getContext(), "Ошибка входа", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean checkData() {
+        if ((password.length() != 0) && (phone.length() != 0)) {
+            if ((password.length() > 3)) {
+                return true;
+            } else {
+                toast = Toast.makeText(getContext(), getString(R.string.MinLenPassword), Toast.LENGTH_LONG);
+                toast.show();
+                return false;
+            }
+        } else {
+            toast = Toast.makeText(getContext(), getString(R.string.Not_fields_filled), Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }
     }
 
 }

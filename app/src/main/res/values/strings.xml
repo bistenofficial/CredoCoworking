@@ -8,5 +8,9 @@
     <string name="Registration_error">Registration error</string>
     <string name="Not_fields_filled">Not all fields are filled</string>
     <string name="Passwords_not_match">Passwords do not match</string>
+    <string name="Data_updated_successfully">Data updated successfully</string>
+    <string name="Data_update_error">Data update error</string>
+    <string name="Account_Info">Account Info</string>
+    <string name="MinLenPassword">Minimum password length - 8 characters</string>
 
 </resources>

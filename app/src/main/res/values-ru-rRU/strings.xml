@@ -9,4 +9,9 @@
     <string name="Registration_error">Ошибка регистрации</string>
     <string name="Not_fields_filled">Не все поля заполнены</string>
     <string name="Passwords_not_match">Пароли не совпадают</string>
+    <string name="Data_updated_successfully">Данные успешно обновлены</string>
+    <string name="Data_update_error">Ошибка обновления данных</string>
+    <string name="Account_Info">Информация об аккаунте</string>
+    <string name="MinLenPassword">Минимальная длина пароля - 8 символов</string>
+
 </resources>

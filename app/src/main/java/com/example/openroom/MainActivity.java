@@ -17,9 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.openroom.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    Toast toast;
     ActivityMainBinding binding;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
