@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenRoom">
         <activity
-            android:name=".LogRegActivity"
+            android:name=".activity.LogRegActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false"/>
     </application>
 

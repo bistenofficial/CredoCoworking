@@ -1,4 +1,4 @@
-package com.example.openroom;
+package com.example.openroom.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.openroom.activity.LogRegActivity;
+import com.example.openroom.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class ProfileFragment extends Fragment {
@@ -67,7 +69,7 @@ public class ProfileFragment extends Fragment {
                 data[2] = editTextNameAgent.getText().toString();
                 data[3] = editTextPatronymic.getText().toString();
                 data[4] = editTextEmail.getText().toString();
-                PutData putData = new PutData("http://192.168.88.43/LoginRegister/changeagentdata.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
+                PutData putData = new PutData("http://192.168.0.104/LoginRegister/changeagentdata.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
@@ -97,7 +99,7 @@ public class ProfileFragment extends Fragment {
             field[0] = "Phone";
             String[] data = new String[1];
             data[0] = sharedPreferencesPhone.getString("Phone", "");
-            PutData putData = new PutData("http://192.168.88.43/LoginRegister/getagentdata.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
+            PutData putData = new PutData("http://192.168.0.104/LoginRegister/getagentdata.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();

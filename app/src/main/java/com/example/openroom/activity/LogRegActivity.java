@@ -1,10 +1,13 @@
-package com.example.openroom;
+package com.example.openroom.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.example.openroom.R;
+import com.example.openroom.fragment.AuthFragment;
 
 public class LogRegActivity extends AppCompatActivity {
 

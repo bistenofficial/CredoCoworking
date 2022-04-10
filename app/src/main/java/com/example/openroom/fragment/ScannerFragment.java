@@ -1,4 +1,4 @@
-package com.example.openroom;
+package com.example.openroom.fragment;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.openroom.R;
 import com.google.zxing.Result;
 
 public class ScannerFragment extends Fragment

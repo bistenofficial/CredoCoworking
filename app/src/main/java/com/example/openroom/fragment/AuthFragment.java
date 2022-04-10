@@ -1,12 +1,8 @@
-package com.example.openroom;
+package com.example.openroom.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
+import com.example.openroom.R;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import ru.tinkoff.decoro.MaskImpl;
+import ru.tinkoff.decoro.slots.PredefinedSlots;
+import ru.tinkoff.decoro.watchers.FormatWatcher;
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 
 public class AuthFragment extends Fragment {
     View inflatedView;
@@ -38,6 +41,11 @@ public class AuthFragment extends Fragment {
         editTextPassword = inflatedView.findViewById(R.id.EditTextPassword);
         editTextLogin = inflatedView.findViewById(R.id.EditTextLogin);
         buttonLogin = inflatedView.findViewById(R.id.buttonLogin);
+
+        MaskImpl mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER);
+        FormatWatcher watcher = new MaskFormatWatcher(mask);
+        watcher.installOn(editTextLogin);
+
         textViewCreate.setOnClickListener(view -> {
 
             RegistrationFragment registrationFragment = new RegistrationFragment();
@@ -58,7 +66,12 @@ public class AuthFragment extends Fragment {
     }
 
     private void signIn() {
-        Handler handler = new Handler(Looper.getMainLooper());
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("localhost:8080/api/v1/auth/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        /*Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -68,7 +81,7 @@ public class AuthFragment extends Fragment {
                 String[] data = new String[2];
                 data[0] = phone;
                 data[1] = password;
-                PutData putData = new PutData("http://192.168.88.43/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
+                PutData putData = new PutData("http://192.168.0.104/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
@@ -89,7 +102,7 @@ public class AuthFragment extends Fragment {
                     }
                 }
             }
-        });
+        });*/
     }
 
     private boolean checkData() {
