@@ -1,9 +1,6 @@
 package com.example.openroom.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +12,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.openroom.MainApplication;
 import com.example.openroom.R;
 import com.example.openroom.api.Agent;
 import com.example.openroom.api.ApiManager;
-import com.example.openroom.fragment.AuthFragment;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 import com.google.common.hash.Hashing;
+
+import org.signal.argon2.Argon2;
+import org.signal.argon2.Argon2Exception;
+import org.signal.argon2.MemoryCost;
+import org.signal.argon2.Type;
+import org.signal.argon2.Version;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
@@ -39,74 +39,108 @@ import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 public class RegistrationFragment extends Fragment {
     private EditText editTextPasswordRepeat, editTextLogin, editTextPassword;
     private Button buttonSignUp;
-    private String phone, password, passwordRepeat, timeString;
+    private String phone, password, passwordRepeat, timeString, userSalt, hardCodeSalt, passwordResult;
     Toast toast;
+
     public static ApiManager apiManager;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.registration_fragment, container, false);
-
-
-        editTextPasswordRepeat = view.findViewById(R.id.EditTextPasswordRepeat);
-        editTextPassword = view.findViewById(R.id.EditTextPassword);
-        editTextLogin = view.findViewById(R.id.EditTextPhone);
-        buttonSignUp = view.findViewById(R.id.buttonRegistration);
+        initialize(view);
 
         MaskImpl mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER);
         FormatWatcher watcher = new MaskFormatWatcher(mask);
         watcher.installOn(editTextLogin);
 
         buttonSignUp.setOnClickListener(view1 -> {
-            phone = editTextLogin.getText().toString();
-            password = editTextPassword.getText().toString();
+            hashing();
             passwordRepeat = editTextPasswordRepeat.getText().toString();
-
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            long time = timestamp.getTime();
-            timeString = String.valueOf(time);
-
-            String salts = Hashing.sha256().hashString("open" + Hashing.sha256().hashString("room", StandardCharsets.UTF_8).toString(), StandardCharsets.UTF_8).toString();
-            final String hashed = Hashing.sha256().hashString(timeString + salts + phone, StandardCharsets.UTF_8).toString();
-
-            if (checkData()) {
-                signUp();
+            if (fieldCheck()) {
+                registrationRequest();
             }
         });
         return view;
     }
 
-    private boolean checkData() {
+    private void initialize(View view) {
+        editTextPasswordRepeat = view.findViewById(R.id.EditTextPasswordRepeat);
+        editTextPassword = view.findViewById(R.id.EditTextPassword);
+        editTextLogin = view.findViewById(R.id.EditTextPhone);
+        buttonSignUp = view.findViewById(R.id.buttonRegistration);
+    }
+
+    private boolean fieldCheck() {
         if ((password.length() != 0) && (passwordRepeat.length() != 0) && (phone.length() != 0)) {
-            if ((password.length() > 8) && (passwordRepeat.length() > 8)) {
+            if ((password.length() >= 8) && (passwordRepeat.length() >= 8)) {
                 if (password.equals(passwordRepeat)) {
                     return true;
                 } else {
-                    toast = Toast.makeText(getContext(), getString(R.string.Passwords_not_match), Toast.LENGTH_LONG);
+                    toast = Toast.makeText(getContext(), getString(R.string.Passwords_not_match), Toast.LENGTH_SHORT);
                     toast.show();
                     return false;
                 }
             } else {
-                toast = Toast.makeText(getContext(), getString(R.string.MinLenPassword), Toast.LENGTH_LONG);
+                toast = Toast.makeText(getContext(), getString(R.string.MinLenPassword), Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
             }
         } else {
-            toast = Toast.makeText(getContext(), getString(R.string.Not_fields_filled), Toast.LENGTH_LONG);
+            toast = Toast.makeText(getContext(), getString(R.string.Not_fields_filled), Toast.LENGTH_SHORT);
             toast.show();
             return false;
         }
     }
 
-    private void signUp() {
+    private void hashing() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        long time = timestamp.getTime();
+        timeString = String.valueOf(time);
+
+        phone = editTextLogin.getText().toString();
+        phone = phone.replaceAll("\\D+","");
+        password = editTextPassword.getText().toString();
+
+        hardCodeSalt = Hashing.sha256().hashString("open" + Hashing.sha256().hashString("room", StandardCharsets.UTF_8), StandardCharsets.UTF_8).toString();
+
+        userSalt = Hashing.sha256().hashString(timeString + phone, StandardCharsets.UTF_8).toString();
+
+
+        Argon2 argon2 = new Argon2.Builder(Version.V13)
+                .type(Type.Argon2i)
+                .memoryCost(MemoryCost.MiB(64))
+                .parallelism(1)
+                .iterations(10)
+                .hashLength(32)
+                .build();
+        byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+        byte[] saltBytes = Hashing.sha256().hashString(hardCodeSalt + userSalt, StandardCharsets.UTF_8).toString().getBytes(StandardCharsets.UTF_8);
+
+        try {
+            Argon2.Result result = argon2.hash(passwordBytes, saltBytes);
+            passwordResult = result.getHashHex();
+        } catch (Argon2Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void registrationRequest() {
+
         apiManager = ApiManager.getInstance();
-        Agent agent = new Agent(null, null, null, editTextLogin.getText().toString(), null, editTextPassword.getText().toString(), null, 0, 4, null);
+        Agent agent = new Agent(null, null, null, phone, null, passwordResult, userSalt.toString(), 0, null, null);
         apiManager.createAgent(agent, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
-                    Toast.makeText(getContext(), "Успешная регистрация", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.Successful_registration), Toast.LENGTH_SHORT).show();
+
+                    AuthFragment authFragment = new AuthFragment();
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fr_place, authFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
                 } else if (response.code() == 400) {
-                    Toast.makeText(getContext(), "Пользователь уже зарегестрирован", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.User_already_registered), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -116,36 +150,5 @@ public class RegistrationFragment extends Fragment {
             }
         });
 
-/*        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                String[] field = new String[2];
-                field[0] = "Phone";
-                field[1] = "password";
-                String[] data = new String[2];
-                data[0] = phone;
-                data[1] = password;
-                PutData putData = new PutData("http://192.168.0.104/LoginRegister/signup.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        Log.i("PutData", result);
-                        if (result.equals("Sign Up Success")) {
-                            toast = Toast.makeText(getContext(), getString(R.string.Successful_registration), Toast.LENGTH_LONG);
-                            toast.show();
-                            AuthFragment authFragment = new AuthFragment();
-                            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fr_place, authFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } else {
-                            toast = Toast.makeText(getContext(), getString(R.string.Registration_error), Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                    }
-                }
-            }
-        });*/
     }
 }

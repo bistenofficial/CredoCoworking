@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation 'org.signal:argon2:13.1@aar'
     implementation "ru.tinkoff.decoro:decoro:1.1.0"
     implementation("com.google.guava:guava:31.1-android")
     implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'

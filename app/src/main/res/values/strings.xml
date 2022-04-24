@@ -12,5 +12,6 @@
     <string name="Data_update_error">Data update error</string>
     <string name="Account_Info">Account Info</string>
     <string name="MinLenPassword">Minimum password length - 8 characters</string>
+    <string name="User_already_registered">User already registered</string>
 
 </resources>

@@ -54,6 +54,7 @@ public class AuthFragment extends Fragment {
             transaction.addToBackStack(null);
             transaction.commit();
         });
+
         buttonLogin.setOnClickListener(view -> {
             phone = editTextLogin.getText().toString();
             password = editTextPassword.getText().toString();
@@ -71,38 +72,6 @@ public class AuthFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        /*Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                String[] field = new String[2];
-                field[0] = "Phone";
-                field[1] = "Password";
-                String[] data = new String[2];
-                data[0] = phone;
-                data[1] = password;
-                PutData putData = new PutData("http://192.168.0.104/LoginRegister/login.php", "POST", field, data);//Необходимо менять локальный IP адрес устройств
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        String result = putData.getResult();
-                        Log.i("PutData", result);
-                        if (result.equals("Login Success")) {
-                            toast = Toast.makeText(getContext(), "Успешный вход", Toast.LENGTH_LONG);
-                            toast.show();
-                            SharedPreferences.Editor editor = sharedPreferencesPhone.edit();
-                            editor.putString("Phone", phone);
-                            editor.apply();
-                            Intent intentSign = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intentSign);
-                            getActivity().finish();
-                        } else {
-                            toast = Toast.makeText(getContext(), "Ошибка входа", Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                    }
-                }
-            }
-        });*/
     }
 
     private boolean checkData() {
