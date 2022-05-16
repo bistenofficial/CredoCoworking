@@ -14,5 +14,6 @@
     <string name="Account_Info">Информация об аккаунте</string>
     <string name="MinLenPassword">Минимальная длина пароля - 8 символов</string>
     <string name="User_already_registered">Пользователь уже зарегистрирован</string>
+    <string name="There_is_no_such_account">Такого аккаунта нет</string>
 
 </resources>

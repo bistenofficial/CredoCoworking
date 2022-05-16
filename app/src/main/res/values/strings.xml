@@ -13,5 +13,6 @@
     <string name="Account_Info">Account Info</string>
     <string name="MinLenPassword">Minimum password length - 8 characters</string>
     <string name="User_already_registered">User already registered</string>
+    <string name="There_is_no_such_account">There is no such account</string>
 
 </resources>

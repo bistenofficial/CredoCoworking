@@ -12,15 +12,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiManager {
     private static ApiService service;
     private static ApiManager apiManager;
-    private static final String BASE_URL = "http://192.168.0.103:8080/api/v1/auth/";
-    private Retrofit retrofit;
+    private static final String BASE_URL = "http://192.168.0.108:8080/api/v1/";
 
     private ApiManager() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
@@ -37,6 +36,21 @@ public class ApiManager {
 
     public void createAgent(Agent agent, Callback<ResponseBody> callback) {
         Call<ResponseBody> agentCall = service.createAgent(agent);
+        agentCall.enqueue(callback);
+    }
+
+    public void signInAgent(Agent agent, Callback<ResponseBody> callback) {
+        Call<ResponseBody> agentCall = service.signIn(agent);
+        agentCall.enqueue(callback);
+    }
+    public void getAgentData(String phone, Callback<Agent> callback)
+    {
+        Call<Agent> agentCall = service.getAgentData(phone);
+        agentCall.enqueue(callback);
+    }
+    public void updateAgentData(Agent agent,Callback<ResponseBody> callback)
+    {
+        Call<ResponseBody> agentCall = service.agentUpdate(agent);
         agentCall.enqueue(callback);
     }
 }

@@ -7,9 +7,10 @@ import java.time.LocalDate;
 
 public class Agent {
 
-    public Agent(String surname, String name, String patronymic, String phone, String email, String password, String salt, Integer verification, Integer id, LocalDate dateOfBirth)
+    public Agent(String surname, String name, String patronymic, String phone, String email, String password, String salt, Integer verification, Integer id, String dateOfBirth)
     {
         this.surname = surname;
+
         this.name = name;
         this.patronymic = patronymic;
         this.phone = phone;
@@ -20,31 +21,35 @@ public class Agent {
         this.id = id;
         this.dateOfBirth = dateOfBirth;
     }
-
+    @SerializedName("surname")
     private String surname;
 
-
+    @SerializedName("name")
     private String name;
 
-
+    @SerializedName("patronymic")
     private String patronymic;
 
-
+    @SerializedName("phone")
     private String phone;
 
-
+    @SerializedName("email")
     private String email;
 
-
+    @SerializedName("password")
     private String password;
 
-
+    @SerializedName("salt")
     private String salt;
 
-    private Integer verification,id;
+    @SerializedName("verification")
+    private Integer verification;
 
+    @SerializedName("id")
+    private Integer id;
 
-    private LocalDate dateOfBirth;
+    @SerializedName("dateOfBirth")
+    private String dateOfBirth;
 
     public String getSurname() {
         return surname;
@@ -114,7 +119,7 @@ public class Agent {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

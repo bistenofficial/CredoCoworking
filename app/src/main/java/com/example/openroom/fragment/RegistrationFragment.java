@@ -17,11 +17,6 @@ import com.example.openroom.api.Agent;
 import com.example.openroom.api.ApiManager;
 import com.google.common.hash.Hashing;
 
-import org.signal.argon2.Argon2;
-import org.signal.argon2.Argon2Exception;
-import org.signal.argon2.MemoryCost;
-import org.signal.argon2.Type;
-import org.signal.argon2.Version;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
@@ -39,7 +34,11 @@ import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 public class RegistrationFragment extends Fragment {
     private EditText editTextPasswordRepeat, editTextLogin, editTextPassword;
     private Button buttonSignUp;
-    private String phone, password, passwordRepeat, timeString, userSalt, hardCodeSalt, passwordResult;
+    private String phone;
+    private String password;
+    private String passwordRepeat;
+    private String userSalt;
+    private String passwordResult;
     Toast toast;
 
     public static ApiManager apiManager;
@@ -53,9 +52,12 @@ public class RegistrationFragment extends Fragment {
         watcher.installOn(editTextLogin);
 
         buttonSignUp.setOnClickListener(view1 -> {
-            hashing();
+
             passwordRepeat = editTextPasswordRepeat.getText().toString();
+            password = editTextPassword.getText().toString();
+            phone = editTextLogin.getText().toString();
             if (fieldCheck()) {
+                hashing();
                 registrationRequest();
             }
         });
@@ -94,39 +96,26 @@ public class RegistrationFragment extends Fragment {
     private void hashing() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         long time = timestamp.getTime();
-        timeString = String.valueOf(time);
+        String timeString = String.valueOf(time);
 
-        phone = editTextLogin.getText().toString();
-        phone = phone.replaceAll("\\D+","");
-        password = editTextPassword.getText().toString();
+        phone = phone.replaceAll("\\D+", "");
 
-        hardCodeSalt = Hashing.sha256().hashString("open" + Hashing.sha256().hashString("room", StandardCharsets.UTF_8), StandardCharsets.UTF_8).toString();
+        String hardCodeSalt = Hashing.sha512().hashString("open" + Hashing.sha512().hashString("room", StandardCharsets.UTF_8), StandardCharsets.UTF_8).toString();
 
-        userSalt = Hashing.sha256().hashString(timeString + phone, StandardCharsets.UTF_8).toString();
+        userSalt = Hashing.sha512().hashString(timeString + phone, StandardCharsets.UTF_8).toString();
 
+        password = Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString();
 
-        Argon2 argon2 = new Argon2.Builder(Version.V13)
-                .type(Type.Argon2i)
-                .memoryCost(MemoryCost.MiB(64))
-                .parallelism(1)
-                .iterations(10)
-                .hashLength(32)
-                .build();
-        byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
-        byte[] saltBytes = Hashing.sha256().hashString(hardCodeSalt + userSalt, StandardCharsets.UTF_8).toString().getBytes(StandardCharsets.UTF_8);
+        String salt = Hashing.sha512().hashString(hardCodeSalt + userSalt, StandardCharsets.UTF_8).toString();
 
-        try {
-            Argon2.Result result = argon2.hash(passwordBytes, saltBytes);
-            passwordResult = result.getHashHex();
-        } catch (Argon2Exception e) {
-            e.printStackTrace();
-        }
+        passwordResult = Hashing.sha512().hashString(salt + password, StandardCharsets.UTF_8).toString();
+
     }
 
     private void registrationRequest() {
 
         apiManager = ApiManager.getInstance();
-        Agent agent = new Agent(null, null, null, phone, null, passwordResult, userSalt.toString(), 0, null, null);
+        Agent agent = new Agent(null, null, null, phone, null, passwordResult, userSalt, 0, null, null);
         apiManager.createAgent(agent, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
