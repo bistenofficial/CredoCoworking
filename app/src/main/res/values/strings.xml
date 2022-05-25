@@ -1,18 +1,24 @@
 <resources>
-    <string name="app_name">Open Room</string>
+    <string name="app_name">Credo</string>
     <string name="coworking_center">Coworking center</string>
-    <string name="Create_account">New here? Create an account</string>
-    <string name="Login">Login to my account</string>
-    <string name="forgotPassword">Forgot your password?</string>
+    <string name="Create_account">Don\'t have an account?</string>
+    <string name="Login">Sign in</string>
+    <string name="forgotPassword">Forgot the password?</string>
     <string name="Successful_registration">Successful registration</string>
     <string name="Registration_error">Registration error</string>
     <string name="Not_fields_filled">Not all fields are filled</string>
-    <string name="Passwords_not_match">Passwords do not match</string>
     <string name="Data_updated_successfully">Data updated successfully</string>
     <string name="Data_update_error">Data update error</string>
     <string name="Account_Info">Account Info</string>
     <string name="MinLenPassword">Minimum password length - 8 characters</string>
     <string name="User_already_registered">User already registered</string>
     <string name="There_is_no_such_account">There is no such account</string>
+    <string name="Remember_me">Remember me</string>
+    <string name="Password">Password</string>
+    <string name="Login_to_your_Account">Login to your\nAccount</string>
+    <string name="or_continue_with">"   or continue with   "</string>
+    <string name="Create_your_Account">Create your\nAccount</string>
+    <string name="Sign_up">Sign up</string>
+    <string name="Already_have_an_account">Already have an account?</string>
 
 </resources>

@@ -3,7 +3,11 @@ package com.example.openroom.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -28,35 +33,26 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.tinkoff.decoro.MaskImpl;
-import ru.tinkoff.decoro.slots.PredefinedSlots;
-import ru.tinkoff.decoro.watchers.FormatWatcher;
-import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 
 public class AuthFragment extends Fragment {
-    private Button buttonLogin;
+    private Button buttonLogin,buttonVisibility;
     private TextView textViewCreate;
-    private EditText editTextPassword;
-    private String phone, password, timeString;
-    private EditText editTextLogin;
+    private EditText editTextPassword, editTextLogin;
+    private String phone, password;
     SharedPreferences sharedPreferencesPhone;
     Toast toast;
-
+    boolean visibilityCheck = true;
     public static ApiManager apiManager;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View views = inflater.inflate(R.layout.authorization_fragment, container, false);
         initialize(views);
+
         sharedPreferencesPhone = this.getActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE);
-        MaskImpl mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER);
-        FormatWatcher watcher = new MaskFormatWatcher(mask);
-        watcher.installOn(editTextLogin);
-
         textViewCreate.setOnClickListener(view -> {
-
             RegistrationFragment registrationFragment = new RegistrationFragment();
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.fr_place, registrationFragment);
+            transaction.replace(R.id.fragmentContainer, registrationFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         });
@@ -65,39 +61,58 @@ public class AuthFragment extends Fragment {
             phone = editTextLogin.getText().toString();
             phone = phone.replaceAll("\\D+", "");
             password = editTextPassword.getText().toString();
-            if (checkData())
-            {
+            if (checkData()) {
                 signIn();
+            }
+        });
+        buttonVisibility.setOnClickListener(view ->
+        {
+            Drawable imgLeft = ResourcesCompat.getDrawable(getResources(), R.drawable.custom_lock_icon, null);
+            if (visibilityCheck) {
+                editTextPassword.setTransformationMethod(null);
+                int position = editTextPassword.length();
+                Drawable imgEnd = ResourcesCompat.getDrawable(getResources(), R.drawable.custom_visibility, null);
+                editTextPassword.setCompoundDrawablesWithIntrinsicBounds( imgLeft, null, imgEnd, null);
+                Editable etExt = editTextPassword.getText();
+                Selection.setSelection(etExt, position);
+                visibilityCheck = false;
+            } else {
+                Drawable imgEnd = ResourcesCompat.getDrawable(getResources(), R.drawable.custom_visibility_off, null);
+                editTextPassword.setCompoundDrawablesWithIntrinsicBounds( imgLeft, null, imgEnd, null);
+                editTextPassword.setTransformationMethod(new PasswordTransformationMethod());
+                visibilityCheck = true;
+                int position = editTextPassword.length();
+                Editable eText = editTextPassword.getText();
+                Selection.setSelection(eText, position);
             }
         });
         return views;
     }
 
     private void initialize(View view) {
-        textViewCreate = view.findViewById(R.id.textViewCreate);
-        editTextPassword = view.findViewById(R.id.EditTextPassword);
-        editTextLogin = view.findViewById(R.id.EditTextLogin);
+        textViewCreate = view.findViewById(R.id.textViewSignUp);
+        editTextPassword = view.findViewById(R.id.EditPassword);
+        editTextLogin = view.findViewById(R.id.EditPhone);
         buttonLogin = view.findViewById(R.id.buttonLogin);
+        buttonVisibility= view.findViewById(R.id.buttonVisibility);
         sharedPreferencesPhone = this.getActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE);
     }
 
     private void signIn() {
-
         password = Hashing.sha512().hashString(password, StandardCharsets.UTF_8).toString();
         apiManager = ApiManager.getInstance();
 
         Agent agent = new Agent(null, null, null, phone, null, password, null, null, null, null);
-        apiManager.signInAgent(agent, new Callback<ResponseBody>()
-        {
-            boolean login = false;
+        apiManager.signInAgent(agent, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 switch (response.code()) {
                     case 202: {
                         SharedPreferences.Editor editor = sharedPreferencesPhone.edit();
-                        editor.putString("Phone", phone);;
+                        editor.putString("Phone", phone);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
+                        getActivity().finish();
                         editor.apply();
                         break;
                     }

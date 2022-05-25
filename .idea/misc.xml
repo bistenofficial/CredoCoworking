@@ -3,16 +3,41 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.464" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable-v24/profile_back_button.xml" value="0.464" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable-v24/profile_bk.xml" value="0.464" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/authreg_button_bg.xml" value="0.315" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/custom_input.xml" value="0.3685" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/custom_lock_icon.xml" value="0.416" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/custom_phone_icon.xml" value="0.1535" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/custom_unput.xml" value="0.5425" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/custom_visibility.xml" value="0.5425" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/custom_visibility_off.xml" value="0.5425" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.464" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_lock.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_lock_focused.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_phone.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_phone_focused.xml" value="0.1535" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.464" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_visibility.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_visibility_focused.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_visibility_off.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_baseline_visibility_off_focused.xml" value="0.5435" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.464" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/inputbg.xml" value="0.3205" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/logo_coworking.xml" value="0.3135" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/splash_screen.xml" value="0.5425" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable/splash_screen_bg.xml" value="0.464" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/activity_log_reg.xml" value="0.4512820512820513" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/activity_splash.xml" value="0.44556962025316454" />
-        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/authorization_fragment.xml" value="0.33" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/authorization_fragment.xml" value="0.5" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/profile_fragment.xml" value="0.5" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/qr_scaner_fragment.xml" value="0.4512820512820513" />
-        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/registration_fragment.xml" value="0.15483870967741936" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/registration_fragment.xml" value="0.5" />
         <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/menu/main_menu.xml" value="0.4512820512820513" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.314" />
+        <entry key="..\:/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.314" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable-v24/profile_back_button.xml" value="0.3635" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable-v24/profile_bk.xml" value="0.3635" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/drawable-v24/profile_bkdop.xml" value="0.3635" />
@@ -23,7 +48,7 @@
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/activity_log_reg.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/activity_main.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/activity_splash.xml" value="0.2936708860759494" />
-        <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/authorization_fragment.xml" value="0.29743589743589743" />
+        <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/authorization_fragment.xml" value="0.6226880394574599" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/profile_fragment.xml" value="0.43796526054590573" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/qr_scaner_fragment.xml" value="0.29743589743589743" />
         <entry key="..\:/Users/maksk/OneDrive/Study_Maxim/4_course/Thesis/App/app/src/main/res/layout/registration_fragment.xml" value="0.33" />

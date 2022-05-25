@@ -21,28 +21,15 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferencesPhone = this.getSharedPreferences("Phone", Context.MODE_PRIVATE);
-        setContentView(R.layout.activity_splash);
         setStatusBarTranslucent(true);
-        Waiting();
-    }
-
-    private void Waiting() {
-        Thread thread = new Thread(() -> {
-            try {
-                TimeUnit.MILLISECONDS.sleep(2000);
-                if (sharedPreferencesPhone.getString("Phone", "").length() != 0) {
-                    intent = new Intent(SplashActivity.this, MainActivity.class);
-                } else {
-                    intent = new Intent(SplashActivity.this, LogRegActivity.class);
-                }
-                startActivity(intent);
-                finish();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        thread.start();
+        sharedPreferencesPhone = this.getSharedPreferences("Phone", Context.MODE_PRIVATE);
+        if (sharedPreferencesPhone.getString("Phone", "").length() != 0) {
+            intent = new Intent(SplashActivity.this, MainActivity.class);
+        } else {
+            intent = new Intent(SplashActivity.this, LogRegActivity.class);
+        }
+        startActivity(intent);
+        finish();
     }
 
     protected void setStatusBarTranslucent(boolean makeTranslucent) {

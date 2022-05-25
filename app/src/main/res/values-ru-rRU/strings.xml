@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Открытая комнта</string>
+    <string name="app_name">Кредо</string>
     <string name="coworking_center">Коворкинг центр</string>
-    <string name="Create_account">Создать аккаунт</string>
-    <string name="Login">Войти в аккаунт</string>
+    <string name="Create_account">У вас нет аккаунта?</string>
+    <string name="Login">Войти</string>
     <string name="forgotPassword">Забыли пароль?</string>
     <string name="Successful_registration">Успешная регистрация</string>
     <string name="Registration_error">Ошибка регистрации</string>
     <string name="Not_fields_filled">Не все поля заполнены</string>
-    <string name="Passwords_not_match">Пароли не совпадают</string>
     <string name="Data_updated_successfully">Данные успешно обновлены</string>
     <string name="Data_update_error">Ошибка обновления данных</string>
     <string name="Account_Info">Информация об аккаунте</string>
     <string name="MinLenPassword">Минимальная длина пароля - 8 символов</string>
     <string name="User_already_registered">Пользователь уже зарегистрирован</string>
     <string name="There_is_no_such_account">Такого аккаунта нет</string>
+    <string name="Remember_me">Запомнить меня</string>
+    <string name="Password">Пароль</string>
+    <string name="Login_to_your_Account">Войти в Ваш\nАккаунт</string>
+    <string name="or_continue_with">"   или продолжить с   "</string>
+    <string name="Create_your_Account">Создать Ваш\nАккаунт</string>
+    <string name="Sign_up">Зарегестрироваться</string>
+    <string name="Already_have_an_account">У вас уже есть аккаунт?</string>
 
 </resources>

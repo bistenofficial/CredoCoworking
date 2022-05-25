@@ -18,7 +18,7 @@ public class LogRegActivity extends AppCompatActivity {
         AuthFragment authFragment = new AuthFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.fr_place, authFragment)
+                .add(R.id.fragmentContainer, authFragment)
                 .commit();
         setStatusBarTranslucent(true);
     }

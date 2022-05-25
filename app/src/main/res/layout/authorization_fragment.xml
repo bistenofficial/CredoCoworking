@@ -7,99 +7,180 @@
     android:background="@android:color/transparent">
 
     <TextView
-        android:id="@+id/textViewCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/montserrat"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:text="@string/Create_account"
-        android:textColor="#80FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/textViewCannotAcces"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
+        android:fontFamily="@font/roboto_medium"
         android:text="@string/forgotPassword"
-        android:textColor="#BFFFFFFF"
+        android:textColor="#246bfd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
     <Button
         android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#246bfd"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/Login"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <EditText
+        android:id="@+id/EditPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_phone_icon"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="+7 ("
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="#78909C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/EditPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_lock_icon"
+        android:drawableEnd="@drawable/custom_visibility_off"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="#9e9e9e"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditPhone"
+        app:passwordToggleEnabled="true" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/authreg_button_bg"
-        android:fontFamily="@font/montserrat"
-        android:shadowColor="#000000"
-        android:shadowRadius="4"
-        android:text="@string/Login"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:theme="@style/Theme.OpenRoom.button"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/Remember_me"
+        android:textColor="#000000"
+        android:theme="@style/MyCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/EditPassword" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/textViewLoginToAccount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColorHint="#A6FFFFFF"
-        android:theme="@style/TextInputLayoutStyle"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/Login_to_your_Account"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/EditPhone"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="164dp"
+        android:layout_height="139dp"
+        android:layout_marginBottom="32dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLoginToAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutLogin">
+        app:srcCompat="@drawable/logo_coworking_blue" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/inputbg"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/montserrat"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:text="12345678"
-            android:textColor="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="32dp"
+        android:background="#e5e5e5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCannotAcces" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutLogin"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/textViewContinue"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:textColorHint="#A6FFFFFF"
-        android:theme="@style/TextInputLayoutStyle"
+        android:layout_marginTop="32dp"
+        android:background="#FFFFFF"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/or_continue_with"
+        android:textColor="#616161"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textViewCannotAcces"
+        tools:gravity="center" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/EditTextLogin"
-            android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonVisibility"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="28dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditPhone" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textViewDontHaveAnAccount"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/inputbg"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/montserrat"
-            android:hint="Phone"
-            android:inputType="text"
-            android:text="79999999999"
-            android:textColor="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/Create_account"
+            android:textColor="#9e9e9e" />
+
+        <TextView
+            android:id="@+id/textViewSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="#246bfd"
+            android:text="@string/Sign_up" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

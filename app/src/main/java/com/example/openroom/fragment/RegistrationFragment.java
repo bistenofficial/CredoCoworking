@@ -32,7 +32,7 @@ import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 
 
 public class RegistrationFragment extends Fragment {
-    private EditText editTextPasswordRepeat, editTextLogin, editTextPassword;
+    private EditText editTextLogin, editTextPassword;
     private Button buttonSignUp;
     private String phone;
     private String password;
@@ -52,8 +52,6 @@ public class RegistrationFragment extends Fragment {
         watcher.installOn(editTextLogin);
 
         buttonSignUp.setOnClickListener(view1 -> {
-
-            passwordRepeat = editTextPasswordRepeat.getText().toString();
             password = editTextPassword.getText().toString();
             phone = editTextLogin.getText().toString();
             if (fieldCheck()) {
@@ -65,23 +63,19 @@ public class RegistrationFragment extends Fragment {
     }
 
     private void initialize(View view) {
-        editTextPasswordRepeat = view.findViewById(R.id.EditTextPasswordRepeat);
         editTextPassword = view.findViewById(R.id.EditTextPassword);
         editTextLogin = view.findViewById(R.id.EditTextPhone);
         buttonSignUp = view.findViewById(R.id.buttonRegistration);
+        MaskImpl mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER);
+        FormatWatcher watcher = new MaskFormatWatcher(mask);
+        watcher.installOn(editTextLogin);
     }
 
     private boolean fieldCheck() {
-        if ((password.length() != 0) && (passwordRepeat.length() != 0) && (phone.length() != 0)) {
-            if ((password.length() >= 8) && (passwordRepeat.length() >= 8)) {
-                if (password.equals(passwordRepeat)) {
+        if ((password.length() != 0) && (phone.length() != 0)) {
+            if (password.length() >= 8)
                     return true;
-                } else {
-                    toast = Toast.makeText(getContext(), getString(R.string.Passwords_not_match), Toast.LENGTH_SHORT);
-                    toast.show();
-                    return false;
-                }
-            } else {
+            else {
                 toast = Toast.makeText(getContext(), getString(R.string.MinLenPassword), Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
@@ -124,7 +118,7 @@ public class RegistrationFragment extends Fragment {
 
                     AuthFragment authFragment = new AuthFragment();
                     FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fr_place, authFragment);
+                    transaction.replace(R.id.fragmentContainer, authFragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
 
