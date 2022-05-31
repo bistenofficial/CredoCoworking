@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_application"
+    app:startDestination="@id/navigation">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.openroom.fragment.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_navigation"
+            app:destination="@id/navigation" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.example.openroom.fragment.ScannerFragment"
+        android:label="ScannerFragment" />
+    <navigation android:id="@+id/navigation"
+        app:startDestination="@id/authFragment">
+        <fragment
+            android:id="@+id/registrationFragment"
+            android:name="com.example.openroom.fragment.RegistrationFragment"
+            android:label="RegistrationFragment">
+            <action
+                android:id="@+id/action_registrationFragment_to_authFragment"
+                app:destination="@id/authFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.example.openroom.fragment.MainFragment"
+            android:label="MainFragment">
+            <action
+                android:id="@+id/action_mainFragment_to_authFragment"
+                app:destination="@id/authFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/authFragment"
+            android:name="com.example.openroom.fragment.AuthFragment"
+            android:label="AuthFragment">
+            <action
+                android:id="@+id/action_authFragment_to_registrationFragment"
+                app:destination="@id/registrationFragment"
+                app:launchSingleTop="true" />
+            <action
+                android:id="@+id/action_authFragment_to_mainFragment"
+                app:destination="@id/mainFragment" />
+        </fragment>
+    </navigation>
+</navigation>

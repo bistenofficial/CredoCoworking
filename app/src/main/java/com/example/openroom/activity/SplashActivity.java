@@ -1,17 +1,12 @@
 package com.example.openroom.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.openroom.R;
-
-import java.util.concurrent.TimeUnit;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
@@ -22,12 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBarTranslucent(true);
-        sharedPreferencesPhone = this.getSharedPreferences("Phone", Context.MODE_PRIVATE);
-        if (sharedPreferencesPhone.getString("Phone", "").length() != 0) {
-            intent = new Intent(SplashActivity.this, MainActivity.class);
-        } else {
-            intent = new Intent(SplashActivity.this, LogRegActivity.class);
-        }
+        intent = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
