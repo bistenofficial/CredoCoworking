@@ -21,5 +21,15 @@
     <string name="Create_your_Account">Создать Ваш\nАккаунт</string>
     <string name="Sign_up">Зарегестрироваться</string>
     <string name="Already_have_an_account">У вас уже есть аккаунт?</string>
+    <string name="profile">Профиль</string>
+    <string name="table_tennis">Настольный теннис</string>
+    <string name="wrong_password">Неправильный пароль</string>
+    <string name="darts">Дартс</string>
+    <string name="workspace">Рабочее место</string>
+    <string name="printer">Принтер</string>
+    <string name="board_game">Настольные игры</string>
+    <string name="conference_hall">Концеренц зал</string>
+    <string name="book">Забронировать</string>
+    <string name="tennis_info">"Настольный теннис или пинг-понг – достаточно распространённый вид спорта и досуга. Он позволяет поддерживать хорошую физическую форму и в то же время не требует специальной подготовки."</string>
 
 </resources>

@@ -1,11 +1,11 @@
-package com.example.openroom.api;
+package com.example.openroom.model;
 
 import com.google.gson.annotations.SerializedName;
 
 
-public class Agent {
+public class AgentModel {
 
-    public Agent(String surname, String name, String patronymic, String phone, String email, String password, String salt, Integer verification, Integer id, String dateOfBirth)
+    public AgentModel(String surname, String name, String patronymic, String phone, String email, String password, String salt, Integer verification, Integer id, String dateOfBirth)
     {
         this.surname = surname;
 

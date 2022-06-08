@@ -20,5 +20,15 @@
     <string name="Create_your_Account">Create your\nAccount</string>
     <string name="Sign_up">Sign up</string>
     <string name="Already_have_an_account">Already have an account?</string>
+    <string name="profile">Profile</string>
+    <string name="table_tennis">Table tennis</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="darts">Darts</string>
+    <string name="workspace">Workspace</string>
+    <string name="printer">Printer</string>
+    <string name="board_game">Board game</string>
+    <string name="conference_hall">Conference hall</string>
+    <string name="book">Book</string>
+    <string name="tennis_info">Table tennis or ping-pong is a fairly common sport and leisure activity. It allows you to maintain good physical shape and at the same time does not require special training.</string>
 
 </resources>

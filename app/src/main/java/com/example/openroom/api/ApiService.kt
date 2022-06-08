@@ -1,5 +1,6 @@
 package com.example.openroom.api
 
+import com.example.openroom.model.AgentModel
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -7,14 +8,14 @@ import retrofit2.http.*
 interface ApiService
 {
     @POST("signup")
-    fun createAgent(@Body agent: Agent?): Call<ResponseBody?>?
+    fun createAgent(@Body agentModel: AgentModel?): Call<ResponseBody?>?
 
     @POST("signing")
-    fun signIn(@Body agent: Agent?): Call<ResponseBody?>?
+    fun signIn(@Body agentModel: AgentModel?): Call<ResponseBody?>?
 
     @GET("get-userdata?")
-    fun getAgentData(@Query("phone") phone: String?): Call<Agent?>?
+    fun getAgentData(@Query("phone") phone: String?): Call<AgentModel?>?
 
     @PUT("update")
-    fun agentUpdate(@Body agent: Agent?): Call<ResponseBody?>?
+    fun agentUpdate(@Body agentModel: AgentModel?): Call<ResponseBody?>?
 }

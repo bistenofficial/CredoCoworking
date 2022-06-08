@@ -1,5 +1,6 @@
 package com.example.openroom.api;
 
+import com.example.openroom.model.AgentModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -12,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiManager {
     private static ApiService service;
     private static ApiManager apiManager;
-    private static final String BASE_URL = "http://192.168.0.108:8080/api/v1/";
+    private static final String BASE_URL = "http://10.0.0.56:8080/api/v1/";
 
     private ApiManager() {
         Gson gson = new GsonBuilder()
@@ -34,23 +35,23 @@ public class ApiManager {
         return apiManager;
     }
 
-    public void createAgent(Agent agent, Callback<ResponseBody> callback) {
-        Call<ResponseBody> agentCall = service.createAgent(agent);
+    public void createAgent(AgentModel agentModel, Callback<ResponseBody> callback) {
+        Call<ResponseBody> agentCall = service.createAgent(agentModel);
         agentCall.enqueue(callback);
     }
 
-    public void signInAgent(Agent agent, Callback<ResponseBody> callback) {
-        Call<ResponseBody> agentCall = service.signIn(agent);
+    public void signInAgent(AgentModel agentModel, Callback<ResponseBody> callback) {
+        Call<ResponseBody> agentCall = service.signIn(agentModel);
         agentCall.enqueue(callback);
     }
-    public void getAgentData(String phone, Callback<Agent> callback)
+    public void getAgentData(String phone, Callback<AgentModel> callback)
     {
-        Call<Agent> agentCall = service.getAgentData(phone);
+        Call<AgentModel> agentCall = service.getAgentData(phone);
         agentCall.enqueue(callback);
     }
-    public void updateAgentData(Agent agent,Callback<ResponseBody> callback)
+    public void updateAgentData(AgentModel agentModel, Callback<ResponseBody> callback)
     {
-        Call<ResponseBody> agentCall = service.agentUpdate(agent);
+        Call<ResponseBody> agentCall = service.agentUpdate(agentModel);
         agentCall.enqueue(callback);
     }
 }
