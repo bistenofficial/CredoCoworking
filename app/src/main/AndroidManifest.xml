@@ -14,9 +14,6 @@
         android:theme="@style/Theme.OpenRoom"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
             android:name=".activity.LogRegActivity"
             android:configChanges="orientation"
             android:exported="false"

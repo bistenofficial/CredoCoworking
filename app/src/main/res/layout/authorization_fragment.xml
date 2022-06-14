@@ -21,14 +21,15 @@
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#246bfd"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/Login"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15sp"
+        android:textSize="20sp"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -114,9 +115,7 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="32dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/textViewLoginToAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -130,7 +129,6 @@
         android:layout_marginEnd="32dp"
         android:background="#e5e5e5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCannotAcces" />
 
@@ -145,8 +143,7 @@
         android:textColor="#616161"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCannotAcces"
-        tools:gravity="center" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCannotAcces" />
 
     <Button
         android:id="@+id/buttonVisibility"
@@ -163,7 +160,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewContinue"

@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Selection
 import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,9 +16,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.openroom.R
-import com.example.openroom.model.AgentModel
 import com.example.openroom.api.ApiManager
+import com.example.openroom.databinding.AuthorizationFragmentBinding
 import com.example.openroom.fragment.ProfileFragment.Companion.apiManager
+import com.example.openroom.model.AgentModel
 import com.google.common.hash.Hashing
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -28,83 +31,86 @@ import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import java.nio.charset.StandardCharsets
 
-class AuthFragment : Fragment(R.layout.authorization_fragment) {
-    private var buttonLogin: Button? = null
-    private var buttonVisibility: Button? = null
-    private var textViewCreate: TextView? = null
-    private var editTextPassword: EditText? = null
-    private var editTextLogin: EditText? = null
+class AuthFragment : Fragment() {
     private var phone: String? = null
     private var password: String? = null
     var sharedPreferencesPhone: SharedPreferences? = null
     private var visibilityCheck = true
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize(view)
+    private var _binding: AuthorizationFragmentBinding? = null
+    private val binding get() = _binding!!
 
-        textViewCreate!!.setOnClickListener {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = AuthorizationFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
+        super.onViewCreated(view, savedInstanceState)
+        sharedPreferencesPhone = requireActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE)
+
+        val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
+        val watcher: FormatWatcher = MaskFormatWatcher(mask)
+        watcher.installOn(EditPhone)
+
+        textViewSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_authFragment_to_registrationFragment)
         }
 
-        buttonLogin!!.setOnClickListener {
-            phone = editTextLogin!!.text.toString()
+        buttonLogin.setOnClickListener {
+            phone = EditPhone.text.toString()
             phone = phone!!.replace("\\D+".toRegex(), "")
-            password = editTextPassword!!.text.toString()
-            if (checkData())
-            {
+            password = EditPassword.text.toString()
+            if (checkData()) {
                 signIn()
             }
         }
-        buttonVisibility!!.setOnClickListener {
+        buttonVisibility.setOnClickListener {
             val imgLeft = ResourcesCompat.getDrawable(resources, R.drawable.custom_lock_icon, null)
             if (visibilityCheck) {
-                editTextPassword!!.transformationMethod = null
-                val position = editTextPassword!!.length()
+                EditPassword.transformationMethod = null
+                val position = EditPassword.length()
                 val imgEnd =
                     ResourcesCompat.getDrawable(resources, R.drawable.custom_visibility, null)
-                editTextPassword!!.setCompoundDrawablesWithIntrinsicBounds(
+                EditPassword.setCompoundDrawablesWithIntrinsicBounds(
                     imgLeft,
                     null,
                     imgEnd,
                     null
                 )
-                val etExt = editTextPassword!!.text
+                val etExt = EditPassword.text
                 Selection.setSelection(etExt, position)
                 visibilityCheck = false
             } else {
                 val imgEnd =
                     ResourcesCompat.getDrawable(resources, R.drawable.custom_visibility_off, null)
-                editTextPassword!!.setCompoundDrawablesWithIntrinsicBounds(
+                EditPassword.setCompoundDrawablesWithIntrinsicBounds(
                     imgLeft,
                     null,
                     imgEnd,
                     null
                 )
-                editTextPassword!!.transformationMethod = PasswordTransformationMethod()
+                EditPassword.transformationMethod = PasswordTransformationMethod()
                 visibilityCheck = true
-                val position = editTextPassword!!.length()
-                val eText = editTextPassword!!.text
+                val position = EditPassword.length()
+                val eText = EditPassword.text
                 Selection.setSelection(eText, position)
             }
         }
     }
 
-    private fun initialize(view: View) {
-        textViewCreate = view.findViewById(R.id.textViewSignUp)
-        editTextPassword = view.findViewById(R.id.EditPassword)
-        editTextLogin = view.findViewById(R.id.EditPhone)
-        buttonLogin = view.findViewById(R.id.buttonLogin)
-        buttonVisibility = view.findViewById(R.id.buttonVisibility)
-        sharedPreferencesPhone =
-            this.requireActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE)
-        val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
-        val watcher: FormatWatcher = MaskFormatWatcher(mask)
-        watcher.installOn(editTextLogin!!)
-    }
-
     private fun signIn() {
-        password = Hashing.sha512().hashString(password.toString(), StandardCharsets.UTF_8).toString()
+        password =
+            Hashing.sha512().hashString(password.toString(), StandardCharsets.UTF_8).toString()
         apiManager = ApiManager.getInstance()
         val agentModel = AgentModel(
             null,
@@ -136,7 +142,11 @@ class AuthFragment : Fragment(R.layout.authorization_fragment) {
                         ).show()
                     }
                     406 -> {
-                        Toast.makeText(context, getString(R.string.wrong_password), Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            context,
+                            getString(R.string.wrong_password),
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 }
@@ -148,13 +158,13 @@ class AuthFragment : Fragment(R.layout.authorization_fragment) {
         })
     }
 
-    private fun checkData(): Boolean
-    {
+    private fun checkData(): Boolean {
         return if (password!!.isNotEmpty() && phone!!.isNotEmpty()) {
             if (password!!.length > 7) {
                 true
             } else {
-                Toast.makeText(context, getString(R.string.MinLenPassword), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.MinLenPassword), Toast.LENGTH_LONG)
+                    .show()
                 false
             }
         } else {

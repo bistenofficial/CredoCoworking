@@ -2,17 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/tile_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewSelectedService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="#FFFFFF"
+        android:fontFamily="@font/roboto_medium"
+        android:text="ItemText"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewBackServiceItem"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewBackServiceItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSelectedService"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSelectedService"
+        app:srcCompat="@drawable/ic_baseline_arrow_back" />
 
     <ScrollView
         android:id="@+id/scrollViewSelectedItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelectedService">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,6 +48,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#FFFFFF"
                 app:cardCornerRadius="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -33,19 +59,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textViewSelectedService"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="ItemText"
-                        android:textColor="#000000"
-                        android:textSize="48sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textViewItemInfo"
@@ -61,7 +74,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewSelectedService" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -69,11 +82,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/photoRecyler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

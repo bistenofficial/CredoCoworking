@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.openroom.R
 import com.example.openroom.adapter.ServicePhotoAdapter
@@ -25,7 +26,10 @@ class ServiceItemFragment : Fragment(R.layout.service_item_fragment) {
 
         binding.textViewItemInfo.text = getString(arguments?.getInt("Info")!!)
         binding.textViewSelectedService.text = getString(arguments?.getInt("Name")!!)
-
+        binding.imageViewBackServiceItem.setOnClickListener()
+        {
+            findNavController().navigate(R.id.action_serviceItemFragment_to_serviceFragment)
+        }
         init(imageArray)
         return binding.root
     }

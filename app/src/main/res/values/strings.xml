@@ -9,7 +9,6 @@
     <string name="Not_fields_filled">Not all fields are filled</string>
     <string name="Data_updated_successfully">Data updated successfully</string>
     <string name="Data_update_error">Data update error</string>
-    <string name="Account_Info">Account Info</string>
     <string name="MinLenPassword">Minimum password length - 8 characters</string>
     <string name="User_already_registered">User already registered</string>
     <string name="There_is_no_such_account">There is no such account</string>
@@ -30,5 +29,13 @@
     <string name="conference_hall">Conference hall</string>
     <string name="book">Book</string>
     <string name="tennis_info">Table tennis or ping-pong is a fairly common sport and leisure activity. It allows you to maintain good physical shape and at the same time does not require special training.</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Logout</string>
+    <string name="contact_us">Contact us</string>
+    <string name="notifications">Notifications</string>
+    <string name="security">Security</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes_logout">Yes, logout</string>
+    <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
 
 </resources>

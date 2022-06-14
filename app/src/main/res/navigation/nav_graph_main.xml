@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_profileFragment_to_logRegActivity"
             app:destination="@id/logRegActivity" />
+        <action
+            android:id="@+id/action_profileFragment_to_logoutFragment"
+            app:destination="@id/logoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/scannerFragment"
@@ -33,5 +36,24 @@
     <fragment
         android:id="@+id/serviceItemFragment"
         android:name="com.example.openroom.fragment.ServiceItemFragment"
-        android:label="ServiceItemFragment" />
+        android:label="ServiceItemFragment" >
+        <action
+            android:id="@+id/action_serviceItemFragment_to_serviceFragment"
+            app:destination="@id/serviceFragment"
+            app:popUpTo="@id/serviceFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/logoutFragment"
+        android:name="com.example.openroom.fragment.LogoutFragment"
+        android:label="LogoutFragment" >
+        <action
+            android:id="@+id/action_logoutFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_logoutFragment_to_logRegActivity"
+            app:destination="@id/logRegActivity" />
+    </dialog>
 </navigation>

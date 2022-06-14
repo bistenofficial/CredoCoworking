@@ -11,11 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="32dp"
         android:background="#e5e5e5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegistration" />
 
@@ -23,7 +22,7 @@
         android:id="@+id/textViewContinue2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/or_continue_with"
@@ -62,25 +61,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/Create_your_Account"
         android:textColor="@color/black"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/EditTextPhone"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoReg" />
 
     <Button
         android:id="@+id/buttonRegistration"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#246bfd"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/Sign_up"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="20sp"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_phone_icon"
@@ -107,7 +107,7 @@
         android:textColorHint="#78909C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/EditTextPassword"
@@ -134,16 +134,17 @@
         app:layout_constraintTop_toBottomOf="@+id/EditTextPhone" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewLogoReg"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_logo_coworking_blue" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="32dp"

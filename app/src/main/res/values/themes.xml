@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.OpenRoom" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.OpenRoom" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#246bfd</item>
         <item name="colorPrimaryVariant">#1b1464</item>
@@ -14,27 +14,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="profileStyledBackButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/profile_back_button</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:paddingLeft">30dp</item>
-        <item name="android:paddingRight">30dp</item>
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_alignParentTop">true</item>
-        <item name="android:minWidth">100dp</item>
-    </style>
 
-    <style name="Theme.OpenRoom.button" parent="Theme.OpenRoom">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-    </style>
-
-    <style name="SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
@@ -43,20 +24,18 @@
         <item name="android:textColorHint">#9e9e9e</item>
     </style>
 
-    <style name="MyCheckBox" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MyCheckBox" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorControlActivated">#246bfd</item>
     </style>
 
-    <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
-
-    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">40dp</item>
-        <item name="cornerSizeTopLeft">40dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
+
 </resources>

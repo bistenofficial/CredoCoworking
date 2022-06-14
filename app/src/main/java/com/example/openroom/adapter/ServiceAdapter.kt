@@ -17,7 +17,7 @@ class ServiceAdapter(private val listener: Listener) :
         fun bind(serviceModel: ServiceModel, listener: Listener) = with(binding)
         {
             imageViewService.setImageResource(serviceModel.imageId)
-            textViewService.text = serviceModel.title
+            textViewServiceItem.text = serviceModel.title
 
             itemView.setOnClickListener {
                 listener.onClick(serviceModel)

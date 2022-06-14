@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -66,38 +65,24 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
                 bundle.putIntArray("Images", imagesArray)
                 bundle.putInt("Name", R.string.table_tennis)
                 bundle.putInt("Info", R.string.tennis_info)
-                findNavController().navigate(
-                    R.id.action_serviceFragment_to_serviceItemFragment,
-                    bundle
-                )
             }
 
-            R.drawable.dart ->
-            {
+            R.drawable.dart -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.dart
                 )
                 bundle.putIntArray("Images", imagesArray)
                 bundle.putInt("Name", R.string.darts)
                 bundle.putInt("Info", R.string.tennis_info)
-                findNavController().navigate(
-                    R.id.action_serviceFragment_to_serviceItemFragment,
-                    bundle
-                )
             }
 
-            R.drawable.workspace ->
-            {
+            R.drawable.workspace -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.workspace
                 )
                 bundle.putIntArray("Images", imagesArray)
                 bundle.putInt("Name", R.string.workspace)
                 bundle.putInt("Info", R.string.tennis_info)
-                findNavController().navigate(
-                    R.id.action_serviceFragment_to_serviceItemFragment,
-                    bundle
-                )
             }
             R.drawable.printer -> {
                 val imagesArray: IntArray = intArrayOf(
@@ -106,10 +91,6 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
                 bundle.putIntArray("Images", imagesArray)
                 bundle.putInt("Name", R.string.printer)
                 bundle.putInt("Info", R.string.tennis_info)
-                findNavController().navigate(
-                    R.id.action_serviceFragment_to_serviceItemFragment,
-                    bundle
-                )
             }
             R.drawable.table_game -> {
                 val imagesArray: IntArray = intArrayOf(
@@ -118,10 +99,6 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
                 bundle.putIntArray("Images", imagesArray)
                 bundle.putInt("Name", R.string.board_game)
                 bundle.putInt("Info", R.string.tennis_info)
-                findNavController().navigate(
-                    R.id.action_serviceFragment_to_serviceItemFragment,
-                    bundle
-                )
             }
             R.drawable.conference -> {
                 val imagesArray: IntArray = intArrayOf(
@@ -130,11 +107,11 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
                 bundle.putIntArray("Images", imagesArray)
                 bundle.putInt("Name", R.string.conference_hall)
                 bundle.putInt("Info", R.string.tennis_info)
-                findNavController().navigate(
-                    R.id.action_serviceFragment_to_serviceItemFragment,
-                    bundle
-                )
             }
         }
+        findNavController().navigate(
+            R.id.action_serviceFragment_to_serviceItemFragment,
+            bundle
+        )
     }
 }
