@@ -113,7 +113,7 @@ public class AgentModel {
         this.verification = verification;
     }
 
-    public Object getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 

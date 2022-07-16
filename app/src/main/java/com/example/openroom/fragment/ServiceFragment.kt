@@ -12,7 +12,7 @@ import com.example.openroom.adapter.ServiceAdapter
 import com.example.openroom.databinding.ServiceFragmentBinding
 import com.example.openroom.model.ServiceModel
 
-class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.Listener {
+class ServiceFragment : Fragment(), ServiceAdapter.Listener {
     private var _binding: ServiceFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = ServiceAdapter(this)
@@ -22,8 +22,12 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
         savedInstanceState: Bundle?
     ): View {
         _binding = ServiceFragmentBinding.inflate(inflater, container, false)
-        init()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
     }
 
     private fun init() = with(binding)
@@ -31,7 +35,6 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
         apply {
             serviceRecycler.layoutManager = GridLayoutManager(context, 2)
             serviceRecycler.adapter = adapter
-
             adapter.addService(ServiceModel(R.drawable.ping_pong, getString(R.string.table_tennis)))
             adapter.addService(ServiceModel(R.drawable.dart, getString(R.string.darts)))
             adapter.addService(ServiceModel(R.drawable.workspace, getString(R.string.workspace)))
@@ -52,7 +55,7 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
     }
 
     override fun onClick(service: ServiceModel) {
-        val bundle = Bundle()
+        var bundle = Bundle()
         adapter.clearServiceList()
         when (service.imageId) {
             R.drawable.ping_pong -> {
@@ -62,56 +65,88 @@ class ServiceFragment : Fragment(R.layout.service_fragment), ServiceAdapter.List
                     R.drawable.table_tennis_playing_2,
                     R.drawable.table_tennis_playing_3
                 )
-                bundle.putIntArray("Images", imagesArray)
-                bundle.putInt("Name", R.string.table_tennis)
-                bundle.putInt("Info", R.string.tennis_info)
+                val addonImageArray: IntArray = intArrayOf(
+                    R.drawable.ping_pong,
+                    R.drawable.table_tennis_playing
+                )
+                val addonStringArray: IntArray =
+                    intArrayOf(R.string.table_tennis, R.string.table_tennis)
+
+                bundle = createBundle(
+                    imagesArray,
+                    R.string.table_tennis,
+                    R.string.tennis_info,
+                    addonImageArray,
+                    addonStringArray
+                )
             }
 
             R.drawable.dart -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.dart
                 )
-                bundle.putIntArray("Images", imagesArray)
-                bundle.putInt("Name", R.string.darts)
-                bundle.putInt("Info", R.string.tennis_info)
+                bundle = createBundle(
+                    imagesArray,
+                    R.string.table_tennis,
+                    R.string.tennis_info,
+                    null,
+                    null
+                )
             }
 
             R.drawable.workspace -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.workspace
                 )
-                bundle.putIntArray("Images", imagesArray)
-                bundle.putInt("Name", R.string.workspace)
-                bundle.putInt("Info", R.string.tennis_info)
+                bundle =
+                    createBundle(imagesArray, R.string.workspace, R.string.tennis_info, null, null)
             }
             R.drawable.printer -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.printer
                 )
-                bundle.putIntArray("Images", imagesArray)
-                bundle.putInt("Name", R.string.printer)
-                bundle.putInt("Info", R.string.tennis_info)
+                bundle =
+                    createBundle(imagesArray, R.string.printer, R.string.tennis_info, null, null)
             }
             R.drawable.table_game -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.table_game
                 )
-                bundle.putIntArray("Images", imagesArray)
-                bundle.putInt("Name", R.string.board_game)
-                bundle.putInt("Info", R.string.tennis_info)
+                bundle =
+                    createBundle(imagesArray, R.string.board_game, R.string.tennis_info, null, null)
             }
             R.drawable.conference -> {
                 val imagesArray: IntArray = intArrayOf(
                     R.drawable.conference
                 )
-                bundle.putIntArray("Images", imagesArray)
-                bundle.putInt("Name", R.string.conference_hall)
-                bundle.putInt("Info", R.string.tennis_info)
+                bundle = createBundle(
+                    imagesArray,
+                    R.string.conference_hall,
+                    R.string.tennis_info,
+                    null,
+                    null
+                )
             }
         }
         findNavController().navigate(
             R.id.action_serviceFragment_to_serviceItemFragment,
             bundle
         )
+    }
+
+    private fun createBundle(
+        imagesArray: IntArray,
+        name: Int,
+        info: Int,
+        addonImageArray: IntArray?,
+        addonStringArray: IntArray?
+    ): Bundle {
+        val bundle = Bundle()
+        bundle.putIntArray("Images", imagesArray)
+        bundle.putInt("Name", name)
+        bundle.putInt("Info", info)
+        bundle.putIntArray("AddonImages", addonImageArray!!)
+        bundle.putIntArray("AddonName", addonStringArray!!)
+        return bundle
     }
 }

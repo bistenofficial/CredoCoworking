@@ -12,8 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiManager {
     private static ApiService service;
+    private static final Server server = new Server();
     private static ApiManager apiManager;
-    private static final String BASE_URL = "http://192.168.0.108:8080/api/v1/";
+    private static final String BASE_URL = server.getServer();
 
     private ApiManager() {
         Gson gson = new GsonBuilder()

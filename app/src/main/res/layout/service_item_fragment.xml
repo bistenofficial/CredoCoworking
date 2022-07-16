@@ -11,12 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:background="#FFFFFF"
-        android:fontFamily="@font/roboto_medium"
         android:text="ItemText"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="34sp"
+        android:theme="@style/TextHeader"
         app:layout_constraintStart_toEndOf="@+id/imageViewBackServiceItem"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +31,7 @@
         android:id="@+id/scrollViewSelectedItem"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSelectedService">
 
@@ -42,16 +39,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addondRecylcer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewInfo" />
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
                 android:backgroundTint="#FFFFFF"
                 app:cardCornerRadius="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/photoRecyler">
@@ -92,35 +99,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <androidx.cardview.widget.CardView
+    <Button
+        android:id="@+id/buttonBook"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#246bfd"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/book"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:backgroundTint="#246bfd"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/book"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                app:cornerRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:textAllCaps="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,11 +6,15 @@
         android:icon="@drawable/ic_baseline_face"
         android:title="@string/profile" />
     <item
+        android:id="@+id/eventFragment"
+        android:icon="@drawable/ic_outline_local_activity"
+        android:title="@string/events" />
+    <item
         android:id="@+id/scannerFragment"
         android:icon="@drawable/ic_baseline_qr_code_scanner_24"
         android:title="Scanner" />
 
     <item
         android:id="@+id/serviceFragment"
-        android:title="Service" />
+        android:title="@string/services" />
 </menu>

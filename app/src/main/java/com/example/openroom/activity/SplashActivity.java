@@ -9,10 +9,6 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.openroom.R;
-
-import java.util.concurrent.TimeUnit;
-
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
     SharedPreferences sharedPreferencesPhone;

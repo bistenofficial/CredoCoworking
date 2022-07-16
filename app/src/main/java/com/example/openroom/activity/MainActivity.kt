@@ -9,9 +9,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.openroom.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.core.view.WindowInsetsControllerCompat
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.profileFragment -> showBottomNav()
                 R.id.serviceFragment -> showBottomNav()
                 R.id.scannerFragment -> showBottomNav()
+                R.id.eventFragment -> showBottomNav()
                 else -> hideBottomNav()
             }
         }

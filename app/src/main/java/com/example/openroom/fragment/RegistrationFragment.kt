@@ -1,15 +1,21 @@
 package com.example.openroom.fragment
 
 import android.os.Bundle
+import android.text.Selection
+import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.openroom.R
 import com.example.openroom.api.ApiManager
+import com.example.openroom.databinding.RegistrationFragmentBinding
 import com.example.openroom.fragment.ProfileFragment.Companion.apiManager
 import com.example.openroom.model.AgentModel
 import com.google.common.hash.Hashing
@@ -25,38 +31,74 @@ import java.nio.charset.StandardCharsets
 import java.sql.Timestamp
 
 class RegistrationFragment : Fragment(R.layout.registration_fragment) {
-    private var editTextLogin: EditText? = null
-    private var editTextPassword: EditText? = null
-    private var buttonSignUp: Button? = null
-    private var textViewSignIn: TextView? = null
     private var phone: String? = null
     private var password: String? = null
     private var userSalt: String? = null
     private var passwordResult: String? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private var _binding: RegistrationFragmentBinding? = null
+    private val binding get() = _binding!!
+    private var visibilityCheck = true
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = RegistrationFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
-        initialize(view)
-        buttonSignUp!!.setOnClickListener {
-            password = editTextPassword!!.text.toString()
-            phone = editTextLogin!!.text.toString()
+        val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
+        val watcher: FormatWatcher = MaskFormatWatcher(mask)
+        watcher.installOn(EditTextPhone)
+
+        buttonRegistration.setOnClickListener {
+            password = EditTextPassword.text.toString()
+            phone = EditTextPhone.text.toString()
             if (fieldCheck()) {
                 hashing()
                 registrationRequest()
             }
         }
-        textViewSignIn!!.setOnClickListener { findNavController().navigate(R.id.action_registrationFragment_to_authFragment) }
+        buttonVisibilityReg.setOnClickListener()
+        {
+            val imgLeft = ResourcesCompat.getDrawable(resources, R.drawable.custom_lock_icon, null)
+            if (visibilityCheck) {
+                EditTextPassword.transformationMethod = null
+                val position = EditTextPassword.length()
+                val imgEnd =
+                    ResourcesCompat.getDrawable(resources, R.drawable.custom_visibility, null)
+                EditTextPassword.setCompoundDrawablesWithIntrinsicBounds(
+                    imgLeft,
+                    null,
+                    imgEnd,
+                    null
+                )
+                val etExt = EditTextPassword.text
+                Selection.setSelection(etExt, position)
+                visibilityCheck = false
+            } else {
+                val imgEnd =
+                    ResourcesCompat.getDrawable(resources, R.drawable.custom_visibility_off, null)
+                EditTextPassword.setCompoundDrawablesWithIntrinsicBounds(
+                    imgLeft,
+                    null,
+                    imgEnd,
+                    null
+                )
+                EditTextPassword.transformationMethod = PasswordTransformationMethod()
+                visibilityCheck = true
+                val position = EditTextPassword.length()
+                val eText = EditTextPassword.text
+                Selection.setSelection(eText, position)
+            }
+        }
+        textViewSignIn.setOnClickListener { findNavController().navigate(R.id.action_registrationFragment_to_authFragment) }
     }
 
-    private fun initialize(view: View) {
-        editTextPassword = view.findViewById(R.id.EditTextPassword)
-        textViewSignIn = view.findViewById(R.id.textViewSignIn)
-        editTextLogin = view.findViewById(R.id.EditTextPhone)
-        buttonSignUp = view.findViewById(R.id.buttonRegistration)
-        val mask = MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
-        val watcher: FormatWatcher = MaskFormatWatcher(mask)
-        watcher.installOn(editTextLogin!!)
-    }
 
     private fun fieldCheck(): Boolean {
         return if (password!!.isNotEmpty() && phone!!.isNotEmpty()) {
@@ -114,7 +156,7 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
                         Toast.LENGTH_SHORT
                     ).show()
                     findNavController().navigate(R.id.action_registrationFragment_to_authFragment)
-                } else if (response.code() == 400) {
+                } else if (response.code() == 406) {
                     Toast.makeText(
                         context,
                         getString(R.string.User_already_registered),
@@ -127,5 +169,9 @@ class RegistrationFragment : Fragment(R.layout.registration_fragment) {
                 Toast.makeText(context, "Error is " + t.message, Toast.LENGTH_LONG).show()
             }
         })
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

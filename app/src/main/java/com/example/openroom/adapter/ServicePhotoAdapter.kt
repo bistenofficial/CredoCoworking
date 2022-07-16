@@ -30,11 +30,11 @@ class ServicePhotoAdapter : RecyclerView.Adapter<ServicePhotoAdapter.Holder>() {
 
     override fun getItemCount() = imageDrawable.size
 
-    fun addService(image: Int) {
+    fun addPhoto(image: Int) {
         imageDrawable.add(image)
     }
 
-    fun clearServiceList() {
+    fun clearPhotoList() {
         imageDrawable.clear()
     }
 }

@@ -36,15 +36,10 @@ class ProfileFragment : Fragment(R.layout.profile_fragment), ProfileAdapter.List
     ): View {
         _binding = ProfileFragmentBinding.inflate(inflater, container, false)
         init()
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding)
-    {
-        super.onViewCreated(view, savedInstanceState)
         sharedPreferencesPhone =
             requireActivity().getSharedPreferences("Phone", Context.MODE_PRIVATE)
         getData()
+        return binding.root
     }
 
     private fun init() = with(binding)
@@ -94,7 +89,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment), ProfileAdapter.List
         ("Version " + (BuildConfig.VERSION_NAME) + "(" + BuildConfig.VERSION_CODE.toString() + ")").also {
             textViewProjectInfo.text = it
         }
-        apiManager!!.getAgentData(
+        /*apiManager!!.getAgentData(
             sharedPreferencesPhone!!.getString("Phone", ""),
             object : Callback<AgentModel?> {
                 override fun onResponse(
@@ -103,20 +98,15 @@ class ProfileFragment : Fragment(R.layout.profile_fragment), ProfileAdapter.List
                 ) {
                     agentModel = response.body()
                     textViewPhone.text = agentModel!!.phone
-                    //editTextSurname.setText(agentModel!!.surname)
-                    //editTextPatronymic.setText(agentModel!!.patronymic)
                     (agentModel!!.surname + " " + agentModel!!.name).also {
                         textViewSurName.text = it
                     }
-
-                    //editTextEmail.setText(agentModel!!.email)
-                    //editTextNameAgent.setText(agentModel!!.name)
                 }
 
                 override fun onFailure(call: Call<AgentModel?>, t: Throwable) {
                     Toast.makeText(context, "Error is " + t.message, Toast.LENGTH_LONG).show()
                 }
-            })
+            })*/
     }
 
     override fun onDestroy() {
@@ -131,6 +121,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment), ProfileAdapter.List
     override fun onClick(profileItem: ProfileItemModel) {
         when (profileItem.photo) {
             R.drawable.ic_baseline_logout -> findNavController().navigate(R.id.action_profileFragment_to_logoutFragment)
+            R.drawable.ic_baseline_person -> findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
     }
 }

@@ -127,7 +127,7 @@ class AuthFragment : Fragment() {
         apiManager!!.signInAgent(agentModel, object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 when (response.code()) {
-                    202 -> {
+                    200 -> {
                         val editor = sharedPreferencesPhone!!.edit()
                         editor.putString("Phone", phone)
                         findNavController().navigate(R.id.action_authFragment_to_mainActivity)
